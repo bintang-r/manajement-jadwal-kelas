@@ -188,13 +188,13 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <span class="avatar avatar-sm px-3 me-3"
-                                        style="background-image: url({{ $row->photoUrl() ?? $row->user->avatarUrl() }})"></span>
+                                        style="background-image: url({{ $row->user->avatarUrl() }})"></span>
 
-                                    @if (is_online($row->id))
+                                    @if (is_online($row->user->id))
                                         <span class="badge bg-success me-1"></span>
                                     @else
                                         <span class="badge bg-secondary me-1"
-                                            title="{{ $row->last_seen_time }}"></span>
+                                            title="{{ $row->user->last_seen_time }}"></span>
                                     @endif
 
                                     <span>{{ $row->full_name }}</span>
