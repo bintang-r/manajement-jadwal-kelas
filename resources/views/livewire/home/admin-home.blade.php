@@ -2,54 +2,8 @@
     <x-alert />
 
     <div class="row">
-        <div class="col-12">
-            <div class="card bg-blue text-white mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4 col-12 mt-lg-5 mt-2">
-                            <h2 class="mb-0">Presensi QR Code Hari Ini</h2>
-                            <p>Daftar siswa yang masuk dan keluar hari ini</p>
-                        </div>
-
-                        <div class="col-lg-8 col-12">
-                            <div class="row">
-                                <div class="col-lg-6 col-12 mb-lg-0 mb-3 align-self-center">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-column">
-                                                <p class="text-blue" style="font-size: 18px; font-weight: 500">Presensi
-                                                    Masuk</p>
-                                                <h1 class="text-blue" style="font-size: 30px">{{ $checkInToday ?? 0 }}
-                                                </h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-6 col-12 mb-lg-0 mb-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex flex-column">
-                                                <p class="text-blue" style="font-size: 18px; font-weight: 500">Presensi
-                                                    Keluar</p>
-                                                <h1 class="text-blue" style="font-size: 30px">{{ $checkOutToday ?? 0 }}
-                                                    </h2>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-12 col-md-4 col-lg-3">
-            <x-card.count-data title="Siswa" :period="$this->period" :total="$this->totalStudent" icon="graduation-cap"
-                color="blue" />
+            <x-card.count-data title="Siswa" :period="$this->period" :total="$this->totalStudent" icon="graduation-cap" color="blue" />
             <x-card.count-data title="Guru" :period="$this->period" :total="$this->totalTeacher" icon="user-tie" color="red" />
             <x-card.count-data title="Admin" :period="$this->period" :total="$this->totalAdmin" icon="database" color="purple" />
             <x-card.count-data title="Jadwal Kelas" :period="$this->period" :total="$this->totalJadwalKelas" icon="calendar"
@@ -101,11 +55,9 @@
 
                 <div class="card-body py-2">
                     <div wire:ignore>
-                        <div hadir="{{ json_encode($this->attendanceHadir['data']) }}"
-                            alpa="{{ json_encode($this->attendanceAlpa['data']) }}"
-                            izin="{{ json_encode($this->attendanceIzin['data']) }}"
-                            sakit="{{ json_encode($this->attendanceSakit['data']) }}"
-                            date="{{ json_encode($this->attendanceHadir['date']) }}" id="chart-mentions"
+                        <div id="chart-mentions" students='@json($this->chartStudents)'
+                            teachers='@json($this->chartTeachers)' classes='@json($this->chartClasses)'
+                            schedules='@json($this->chartSchedules)' date='@json($this->chartDates)'
                             class="chart-lg">
                         </div>
                     </div>
@@ -119,68 +71,45 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let chart;
-            const item = document.getElementById('chart-mentions');
+            const el = document.getElementById('chart-mentions');
 
-            function renderChart(hadir, alpa, izin, sakit, date) {
-                if (!item) {
-                    console.error("ELEMENT ID #chart-mentions TIDAK DITEMUKAN!");
-                    return;
-                }
+            function renderChart(students, teachers, classes, schedules, date) {
+                if (chart) chart.destroy();
 
-                if (chart) {
-                    chart.destroy();
-                }
-
-                chart = new ApexCharts(item, {
+                chart = new ApexCharts(el, {
                     chart: {
-                        type: "bar",
-                        stacked: true,
-                        height: 600,
-                        parentHeightOffset: 0,
+                        type: 'area',
+                        height: 550,
                         toolbar: {
                             show: false
                         },
                         animations: {
-                            enabled: true
-                        }
-                    },
-                    stroke: {
-                        show: true,
-                        width: 1,
-                        colors: ['#fff']
-                    },
-                    plotOptions: {
-                        bar: {
-                            horizontal: false,
-                            dataLabels: {
-                                total: {
-                                    enabled: true,
-                                    style: {
-                                        fontSize: '13px',
-                                        fontWeight: 900
-                                    }
-                                }
-                            }
+                            enabled: true,
+                            easing: 'easeinout'
                         }
                     },
                     dataLabels: {
                         enabled: false
                     },
+                    stroke: {
+                        curve: 'smooth',
+                        width: 3
+                    },
                     series: [{
-                            name: "Hadir",
-                            data: hadir
+                            name: 'Siswa Baru',
+                            data: students
                         },
                         {
-                            name: "Alpa",
-                            data: alpa
+                            name: 'Guru Baru',
+                            data: teachers
                         },
                         {
-                            name: "Izin",
-                            data: izin
+                            name: 'Kelas Baru',
+                            data: classes
                         },
                         {
-                            name: "Sakit",
-                            data: sakit
+                            name: 'Jadwal Kelas',
+                            data: schedules
                         },
                     ],
                     xaxis: {
@@ -198,32 +127,48 @@
                             }
                         }
                     },
-                    colors: ["#4ade80", "#fc9f13", "#3b82f6", "#f43f5e"],
+                    colors: ['#22c55e', '#3b82f6', '#a855f7', '#f97316'],
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.4,
+                            opacityTo: 0.05,
+                            stops: [0, 90, 100]
+                        }
+                    },
                     legend: {
-                        show: true
+                        position: 'top',
+                        horizontalAlign: 'center'
+                    },
+                    tooltip: {
+                        theme: 'dark'
                     }
                 });
 
                 chart.render();
             }
 
-            Livewire.on('updateChart', (data) => {
-                let hadir = data[0].hadir;
-                let alpa = data[0].alpa;
-                let izin = data[0].izin;
-                let sakit = data[0].sakit;
-                let date = data[0].date;
+            renderChart(
+                JSON.parse(el.getAttribute('students')),
+                JSON.parse(el.getAttribute('teachers')),
+                JSON.parse(el.getAttribute('classes')),
+                JSON.parse(el.getAttribute('schedules')),
+                JSON.parse(el.getAttribute('date'))
+            );
 
-                renderChart(hadir, alpa, izin, sakit, date);
+            Livewire.on('updateChart', data => {
+                const payload = data[0];
+
+                renderChart(
+                    payload.students,
+                    payload.teachers,
+                    payload.classes,
+                    payload.schedules,
+                    payload.date
+                );
             });
 
-            renderChart(
-                JSON.parse(item.getAttribute('hadir')),
-                JSON.parse(item.getAttribute('alpa')),
-                JSON.parse(item.getAttribute('izin')),
-                JSON.parse(item.getAttribute('sakit')),
-                JSON.parse(item.getAttribute('date'))
-            );
         });
     </script>
 @endpush

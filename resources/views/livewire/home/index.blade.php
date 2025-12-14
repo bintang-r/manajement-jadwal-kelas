@@ -7,17 +7,7 @@
 
     <x-alert />
 
-    @if (in_array(auth()->user()->role, ['admin', 'developer']))
-        {{-- <livewire:home.admin-home /> --}}
-    @endif
-
-    @if (auth()->user()->role == 'guru')
-        {{-- <livewire:home.teacher-home /> --}}
-    @endif
-
-    @if (auth()->user()->role == 'siswa')
-        {{-- <livewire:home.student-home /> --}}
-    @endif
+    <livewire:home.admin-home />
 
     <div class="card mt-4" wire:poll.30000ms>
         <h4 class="card-header">Riwayat Login Pengguna</h4>

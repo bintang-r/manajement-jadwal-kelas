@@ -23,15 +23,13 @@ class AdminHome extends Component
     public $totalMataPelajaran = 0;
     public $totalKelas = 0;
 
+    public $chartStudents;
+    public $chartTeachers;
+    public $chartClasses;
+    public $chartSchedules;
+    public $chartDates;
+
     public $period = 'daily';
-
-    public $attendanceHadir;
-    public $attendanceAlpa;
-    public $attendanceIzin;
-    public $attendanceSakit;
-
-    public $checkInToday = 0;
-    public $checkOutToday = 0;
 
     public function getDataCount()
     {
@@ -45,43 +43,37 @@ class AdminHome extends Component
 
     public function getDataChart()
     {
-        $this->attendanceHadir = HomeChart::CHART_DATA(StudentAttendance::query()->where('status_attendance', 'hadir'), $this->period);
+        $this->period = $this->period ?: 'daily';
 
-        $this->attendanceAlpa = HomeChart::CHART_DATA(StudentAttendance::query()->where('status_attendance', 'alpa'), $this->period);
+        $studentChart  = HomeChart::CHART_DATA(Student::query(), $this->period);
+        $teacherChart  = HomeChart::CHART_DATA(Teacher::query(), $this->period);
+        $classChart    = HomeChart::CHART_DATA(ClassRoom::query(), $this->period);
+        $scheduleChart = HomeChart::CHART_DATA(ClassSchedule::query(), $this->period);
 
-        $this->attendanceIzin = HomeChart::CHART_DATA(StudentAttendance::query()->where('status_attendance', 'izin'), $this->period);
-
-        $this->attendanceSakit = HomeChart::CHART_DATA(StudentAttendance::query()->where('status_attendance', 'sakit'), $this->period);
+        $this->chartStudents  = $studentChart['data'];
+        $this->chartTeachers  = $teacherChart['data'];
+        $this->chartClasses   = $classChart['data'];
+        $this->chartSchedules = $scheduleChart['data'];
+        $this->chartDates     = $studentChart['date'];
     }
+
 
     public function mount()
     {
         $this->getDataCount();
         $this->getDataChart();
-
-        $this->checkInToday = CheckInRecord::whereDate('attendance_date', now()->toDateString())
-            ->count();
-
-        $this->checkOutToday = CheckOutRecord::whereDate('attendance_date', now()->toDateString())
-            ->count();
     }
 
     public function updatedPeriod()
     {
         $this->getDataChart();
 
-        $date = $this->attendanceHadir['date'];
-        $attendanceHadir = $this->attendanceHadir['data'];
-        $attendanceAlpa = $this->attendanceAlpa['data'];
-        $attendanceIzin = $this->attendanceIzin['data'];
-        $attendanceSakit = $this->attendanceSakit['data'];
-
         $this->dispatch('updateChart', [
-            'hadir' => $attendanceHadir,
-            'alpa' => $attendanceAlpa,
-            'izin' => $attendanceIzin,
-            'sakit' => $attendanceSakit,
-            'date' => $date,
+            'students'  => $this->chartStudents,
+            'teachers'  => $this->chartTeachers,
+            'classes'   => $this->chartClasses,
+            'schedules' => $this->chartSchedules,
+            'date'      => $this->chartDates,
         ]);
     }
 
