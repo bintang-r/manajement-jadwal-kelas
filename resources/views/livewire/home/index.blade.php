@@ -19,10 +19,6 @@
         <livewire:home.student-home />
     @endif
 
-    @if (auth()->user()->role == 'wali siswa')
-        <livewire:home.student-guardian-home />
-    @endif
-
     <div class="card mt-4" wire:poll.30000ms>
         <h4 class="card-header">Riwayat Login Pengguna</h4>
         <div class="card-body">
@@ -64,7 +60,6 @@
                                         <span @class([
                                             'badge',
                                             'bg-green-lt' => $login->role == 'admin',
-                                            'bg-blue-lt' => $login->role == 'wali siswa',
                                             'bg-yellow-lt' => $login->role == 'guru',
                                             'bg-purple-lt' => $login->role == 'siswa',
                                             'bg-lime-lt' => $login->role == 'developer',
