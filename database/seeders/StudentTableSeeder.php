@@ -21,9 +21,9 @@ class StudentTableSeeder extends Seeder
 
         $dataStudent = [
             [
-                'username'          => 'Nurhaliza Student',
-                'email'             => 'nurhalizastudent@gmail.com',
-                'password'          => bcrypt('student123'),
+                'username'          => 'Milda Student',
+                'email'             => 'mildastudent@gmail.com',
+                'password'          => bcrypt('mildastudent123'),
                 'role'              => 'siswa',
 
                 'full_name'         => 'Nurhaliza Student',
