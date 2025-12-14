@@ -7,7 +7,8 @@
 
         <h1 class="navbar-brand navbar-brand-autodark d-lg-flex d-none">
             <a href="{{ route('home') }}" class="px-3">
-                <img src="{{ asset('static/ryoogen/logo/DARK.png') }}" width="100%" height="100%" alt="Tabler">
+                <img src="{{ asset('static/ryoogen/logo/LOGO-SIMJS.png') }}" width="100%" height="100%"
+                    alt="Tabler">
             </a>
         </h1>
 

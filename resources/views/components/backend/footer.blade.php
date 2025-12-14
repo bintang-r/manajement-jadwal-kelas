@@ -6,7 +6,7 @@
                     <li class="list-inline-item">
                         <a href="https://github.com/ryoogenmedia" target="_blank" class="link-secondary" rel="noopener">
                             @include('partials.svg.love')
-                            Kelompok VI
+                            By Kelompok VI
                         </a>
                     </li>
                 </ul>
@@ -15,8 +15,8 @@
                 <ul class="list-inline list-inline-dots mb-0">
                     <li class="list-inline-item">
                         Copyright &copy; 2024
-                        <a href="https://github.com/ryoogenmedia" class="link-secondary">APLIKASI SISTEM INFORMASI
-                            MANAJEMEN JADWAL SEKOLAH (SIMJS) </a>.
+                        <a href="https://github.com/ryoogenmedia" class="link-secondary">SIMJS | Sistem Informasi
+                            Manajemen Jadwal Kelas</a>.
                         All rights reserved.
                     </li>
                     <li class="list-inline-item">
