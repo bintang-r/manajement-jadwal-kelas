@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\Admin;
+namespace App\Livewire\Admin;
 
 use App\Models\User;
 use Exception;
@@ -79,11 +79,11 @@ class Create extends Component
             'detail' => "Berhasil menambahkan data pengguna.",
         ]);
 
-        return redirect()->route('master.admin.index');
+        return redirect()->route('admin.index');
     }
 
     public function render()
     {
-        return view('livewire.master.admin.create');
+        return view('livewire.admin.create');
     }
 }

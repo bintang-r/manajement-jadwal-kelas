@@ -6,7 +6,7 @@
     <x-slot name="pagePretitle">Kelola Data Admin</x-slot>
 
     <x-slot name="button">
-        <x-datatable.button.add name="Tambah Admin" :route="route('master.admin.create')" />
+        <x-datatable.button.add name="Tambah Admin" :route="route('admin.create')" />
     </x-slot>
 
     <x-alert />
@@ -125,7 +125,7 @@
                             <td>
                                 <div class="d-flex">
                                     <div class="ms-auto">
-                                        <a class="btn btn-sm" href="{{ route('master.admin.edit', $row->id) }}">
+                                        <a class="btn btn-sm" href="{{ route('admin.edit', $row->id) }}">
                                             Sunting
                                         </a>
                                     </div>

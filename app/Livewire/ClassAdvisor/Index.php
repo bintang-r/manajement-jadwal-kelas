@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\ClassAdvisor;
+namespace App\Livewire\ClassAdvisor;
 
 use App\Livewire\Traits\DataTable\WithBulkActions;
 use App\Livewire\Traits\DataTable\WithCachedRows;
@@ -88,8 +88,9 @@ class Index extends Component
     }
 
     #[Computed()]
-    public function teachers(){
-        return Teacher::all(['id','name']);
+    public function teachers()
+    {
+        return Teacher::all(['id', 'name']);
     }
 
     #[On('muat-ulang')]
@@ -137,6 +138,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.master.class-advisor.index');
+        return view('livewire.class-advisor.index');
     }
 }

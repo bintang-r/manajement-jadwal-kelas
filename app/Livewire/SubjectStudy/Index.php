@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\SubjectStudy;
+namespace App\Livewire\SubjectStudy;
 
 use App\Exports\SubjectStudyExport;
 use App\Imports\SubjectStudyImport;

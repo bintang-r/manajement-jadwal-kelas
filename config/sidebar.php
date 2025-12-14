@@ -35,44 +35,48 @@ return [
     // ADMIN
 
     [
-        'title' => 'Master',
-        'description' => 'Menampilkan data master.',
-        'icon' => 'database',
-        'route-name' => 'master.admin.index',
-        'is-active' => 'master*',
+        'title' => 'Admin',
+        'icon' => 'user-shield',
+        'description' => 'Melihat daftar admin.',
+        'route-name' => 'admin.index',
+        'is-active' => 'admin*',
         'roles' => ['admin', 'developer'],
-        'sub-menus' => [
-            [
-                'title' => 'Admin',
-                'description' => 'Melihat daftar admin.',
-                'route-name' => 'master.admin.index',
-                'is-active' => 'master.admin*',
-            ],
-            [
-                'title' => 'Ruang Kelas',
-                'description' => 'Melihat daftar ruang kelas.',
-                'route-name' => 'master.classroom.index',
-                'is-active' => 'master.classroom*',
-            ],
-            [
-                'title' => 'Jadwal Kelas',
-                'description' => 'Melihat jadwal kelas.',
-                'route-name' => 'master.class-schedule.index',
-                'is-active' => 'master.class-schedule*',
-            ],
-            [
-                'title' => 'Wali Kelas',
-                'description' => 'Melihat daftar wali kelas tiap kelas.',
-                'route-name' => 'master.advisor-class.index',
-                'is-active' => 'master.advisor-class*',
-            ],
-            [
-                'title' => 'Mata Pelajaran',
-                'description' => 'Melihat daftar ruang kelas.',
-                'route-name' => 'master.subject-study.index',
-                'is-active' => 'master.subject-study*',
-            ],
-        ],
+    ],
+
+    [
+        'title' => 'Ruang Kelas',
+        'icon' => 'school',
+        'description' => 'Melihat daftar ruang kelas.',
+        'route-name' => 'classroom.index',
+        'is-active' => 'classroom*',
+        'roles' => ['admin', 'developer'],
+    ],
+
+    [
+        'title' => 'Jadwal Kelas',
+        'icon' => 'calendar',
+        'description' => 'Melihat jadwal kelas.',
+        'route-name' => 'class-schedule.index',
+        'is-active' => 'class-schedule*',
+        'roles' => ['admin', 'developer'],
+    ],
+
+    [
+        'title' => 'Wali Kelas',
+        'icon' => 'user-friends',
+        'description' => 'Melihat daftar wali kelas tiap kelas.',
+        'route-name' => 'advisor-class.index',
+        'is-active' => 'advisor-class*',
+        'roles' => ['admin', 'developer'],
+    ],
+
+    [
+        'title' => 'Mata Pelajaran',
+        'icon' => 'book',
+        'description' => 'Melihat daftar mata pelajaran.',
+        'route-name' => 'subject-study.index',
+        'is-active' => 'subject-study*',
+        'roles' => ['admin', 'developer'],
     ],
 
     [

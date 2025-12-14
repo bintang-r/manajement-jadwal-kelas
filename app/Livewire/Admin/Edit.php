@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\Admin;
+namespace App\Livewire\Admin;
 
 use App\Models\User;
 use Exception;
@@ -93,7 +93,7 @@ class Edit extends Component
             'detail' => "Berhasil menyunting data pengguna.",
         ]);
 
-        return redirect()->route('master.admin.index');
+        return redirect()->route('admin.index');
     }
 
     public function mount($id)
@@ -109,6 +109,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.master.admin.edit');
+        return view('livewire.admin.edit');
     }
 }

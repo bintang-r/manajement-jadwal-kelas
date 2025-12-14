@@ -1,19 +1,19 @@
 <div>
-    <x-slot name="title">Tambah Jadwal kelas</x-slot>
+    <x-slot name="title">Sunting Jadwal kelas</x-slot>
 
-    <x-slot name="pagePretitle">Menambah Jadwal Kelas</x-slot>
+    <x-slot name="pagePretitle">Menyunting Jadwal Kelas</x-slot>
 
-    <x-slot name="pageTitle">Tambah Jadwal Kelas</x-slot>
+    <x-slot name="pageTitle">Sunting Jadwal Kelas</x-slot>
 
     <x-slot name="button">
-        <x-datatable.button.back name="Kembali" :route="route('master.class-schedule.index')" />
+        <x-datatable.button.back name="Kembali" :route="route('class-schedule.index')" />
     </x-slot>
 
     <x-alert />
 
-    <form class="card" wire:submit.prevent="save" autocomplete="off">
+    <form class="card" wire:submit.prevent="edit" autocomplete="off">
         <div class="card-header">
-            Tambah jadwal kelas
+            Sunting jadwal kelas
         </div>
 
         <div class="card-body">
@@ -76,7 +76,7 @@
             <div class="btn-list justify-content-end">
                 <button type="reset" class="btn">Reset</button>
 
-                <x-datatable.button.save target="save" />
+                <x-datatable.button.save target="edit" />
             </div>
         </div>
     </form>

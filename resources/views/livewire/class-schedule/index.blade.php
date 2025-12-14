@@ -6,7 +6,7 @@
     <x-slot name="pagePretitle">Kelola Data Jadwal Kelas</x-slot>
 
     <x-slot name="button">
-        <x-datatable.button.add name="Tambah Jadwal Kelas" :route="route('master.class-schedule.create')" />
+        <x-datatable.button.add name="Tambah Jadwal Kelas" :route="route('class-schedule.create')" />
     </x-slot>
 
     <x-alert />
@@ -180,8 +180,7 @@
                             <td>
                                 <div class="d-flex">
                                     <div class="ms-auto">
-                                        <a class="btn btn-sm"
-                                            href="{{ route('master.class-schedule.edit', $row->id) }}">
+                                        <a class="btn btn-sm" href="{{ route('class-schedule.edit', $row->id) }}">
                                             Sunting
                                         </a>
                                     </div>

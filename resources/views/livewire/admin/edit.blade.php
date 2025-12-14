@@ -6,7 +6,7 @@
     <x-slot name="pageTitle">Sunting Admin</x-slot>
 
     <x-slot name="button">
-        <x-datatable.button.back name="Kembali" :route="route('master.admin.index')" />
+        <x-datatable.button.back name="Kembali" :route="route('admin.index')" />
     </x-slot>
 
     <x-alert />

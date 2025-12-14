@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\ClassSchedule;
+namespace App\Livewire\ClassSchedule;
 
 use App\Models\ClassRoom;
 use App\Models\ClassSchedule;
@@ -25,23 +25,25 @@ class Edit extends Component
     // IDENTITY
     public $classScheduleId;
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'guru' => ['required'],
             'kelas' => ['required'],
             'mataPelajaran' => ['required'],
 
-            'hari' => ['required','string','min:2','max:255',Rule::in(config('const.name_days'))],
-            'waktuMasuk' => ['required','min:2','max:255'],
-            'waktuKeluar' => ['required','string','min:2','max:255'],
-            'keterangan' => ['nullable','string'],
+            'hari' => ['required', 'string', 'min:2', 'max:255', Rule::in(config('const.name_days'))],
+            'waktuMasuk' => ['required', 'min:2', 'max:255'],
+            'waktuKeluar' => ['required', 'string', 'min:2', 'max:255'],
+            'keterangan' => ['nullable', 'string'],
         ];
     }
 
-    public function edit(){
+    public function edit()
+    {
         $this->validate();
 
-        try{
+        try {
             DB::beginTransaction();
 
             $classSchedule = ClassSchedule::findOrFail($this->classScheduleId);
@@ -57,7 +59,7 @@ class Edit extends Component
             ]);
 
             DB::commit();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
 
             logger()->error(
@@ -82,25 +84,29 @@ class Edit extends Component
             'detail' => "Berhasil menyunting data pengguna.",
         ]);
 
-        return redirect()->route('master.class-schedule.index');
+        return redirect()->route('class-schedule.index');
     }
 
     #[Computed()]
-    public function teachers(){
-        return Teacher::all(['id','name','nip']);
+    public function teachers()
+    {
+        return Teacher::all(['id', 'name', 'nip']);
     }
 
     #[Computed()]
-    public function class_rooms(){
-        return ClassRoom::all(['id','name_class']);
+    public function class_rooms()
+    {
+        return ClassRoom::all(['id', 'name_class']);
     }
 
     #[Computed()]
-    public function subject_studies(){
-        return SubjectStudy::all(['id','name_subject']);
+    public function subject_studies()
+    {
+        return SubjectStudy::all(['id', 'name_subject']);
     }
 
-    public function mount($id){
+    public function mount($id)
+    {
         $classSchedule = ClassSchedule::findOrFail($id);
 
         $this->classScheduleId = $classSchedule->id;
@@ -115,6 +121,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.master.class-schedule.edit');
+        return view('livewire.class-schedule.edit');
     }
 }

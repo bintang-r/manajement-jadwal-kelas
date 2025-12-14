@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\ClassSchedule;
+namespace App\Livewire\ClassSchedule;
 
 use App\Exports\ClassScheduleExport;
 use App\Imports\ClassScheduleImport;
@@ -218,6 +218,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.master.class-schedule.index');
+        return view('livewire.class-schedule.index');
     }
 }

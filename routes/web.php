@@ -85,49 +85,42 @@ Route::middleware('auth', 'verified', 'force.logout')->namespace('App\Livewire')
     });
 
     /**
-     * master / data master
+     * class schedule / jadwal kelas
      */
-    Route::prefix('master')->name('master.')->middleware('roles:admin,developer')->namespace('Master')->group(function () {
-        Route::redirect('/', 'master/admin');
+    Route::prefix('jadwal-kelas')->name('class-schedule.')->middleware('roles:admin,developer')->group(function () {
+        Route::get('/', ClassSchedule\Index::class)->name('index');
+        Route::get('/tambah', ClassSchedule\Create::class)->name('create');
+        Route::get('/sunting/{id}', ClassSchedule\Edit::class)->name('edit');
+    });
 
-        /**
-         * class schedule / jadwal kelas
-         */
-        Route::prefix('jadwal-kelas')->name('class-schedule.')->middleware('roles:admin,developer')->group(function () {
-            Route::get('/', ClassSchedule\Index::class)->name('index');
-            Route::get('/tambah', ClassSchedule\Create::class)->name('create');
-            Route::get('/sunting/{id}', ClassSchedule\Edit::class)->name('edit');
-        });
+    /**
+     * admin
+     */
+    Route::prefix('admin')->name('admin.')->middleware('roles:admin,developer')->group(function () {
+        Route::get('/', Admin\Index::class)->name('index');
+        Route::get('/tambah', Admin\Create::class)->name('create');
+        Route::get('/{id}/edit', Admin\Edit::class)->name('edit');
+    });
 
-        /**
-         * admin
-         */
-        Route::prefix('admin')->name('admin.')->middleware('roles:admin,developer')->group(function () {
-            Route::get('/', Admin\Index::class)->name('index');
-            Route::get('/tambah', Admin\Create::class)->name('create');
-            Route::get('/{id}/edit', Admin\Edit::class)->name('edit');
-        });
+    /**
+     * class room / ruang kelas
+     */
+    Route::prefix('ruang-kelas')->name('classroom.')->middleware('roles:admin,developer')->group(function () {
+        Route::get('/', ClassRoom\Index::class)->name('index');
+    });
 
-        /**
-         * class room / ruang kelas
-         */
-        Route::prefix('ruang-kelas')->name('classroom.')->middleware('roles:admin,developer')->group(function () {
-            Route::get('/', ClassRoom\Index::class)->name('index');
-        });
+    /**
+     * subject study / mata pelajaran
+     */
+    Route::prefix('mata-pelajaran')->name('subject-study.')->middleware('roles:admin,developer')->group(function () {
+        Route::get('/', SubjectStudy\Index::class)->name('index');
+    });
 
-        /**
-         * subject study / mata pelajaran
-         */
-        Route::prefix('mata-pelajaran')->name('subject-study.')->middleware('roles:admin,developer')->group(function () {
-            Route::get('/', SubjectStudy\Index::class)->name('index');
-        });
-
-        /**
-         *  class advisor / wali kelas
-         */
-        Route::prefix('wali-kelas')->name('advisor-class.')->middleware('roles:admin,developer')->group(function () {
-            Route::get('/', ClassAdvisor\Index::class)->name('index');
-        });
+    /**
+     *  class advisor / wali kelas
+     */
+    Route::prefix('wali-kelas')->name('advisor-class.')->middleware('roles:admin,developer')->group(function () {
+        Route::get('/', ClassAdvisor\Index::class)->name('index');
     });
 
     /**

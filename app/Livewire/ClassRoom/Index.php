@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\ClassRoom;
+namespace App\Livewire\ClassRoom;
 
 use App\Exports\ClassRoomExport;
 use App\Imports\ClassRoomImport;
@@ -11,7 +11,6 @@ use App\Livewire\Traits\DataTable\WithSorting;
 use App\Models\ClassRoom;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -286,7 +285,7 @@ class Index extends Component
             'detail' => $message,
         ]);
 
-        return redirect()->route('master.classroom.index');
+        return redirect()->route('classroom.index');
     }
 
     #[Computed()]
@@ -313,6 +312,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.master.class-room.index');
+        return view('livewire.class-room.index');
     }
 }

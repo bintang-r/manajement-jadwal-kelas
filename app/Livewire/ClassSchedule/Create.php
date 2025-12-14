@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\ClassSchedule;
+namespace App\Livewire\ClassSchedule;
 
 use App\Models\ClassRoom;
 use App\Models\ClassSchedule;
@@ -22,23 +22,25 @@ class Create extends Component
     public $waktuKeluar;
     public $keterangan;
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'guru' => ['required'],
             'kelas' => ['required'],
             'mataPelajaran' => ['required'],
 
-            'hari' => ['required','string','min:2','max:255',Rule::in(config('const.name_days'))],
-            'waktuMasuk' => ['required','min:2','max:255'],
-            'waktuKeluar' => ['required','string','min:2','max:255'],
-            'keterangan' => ['nullable','string'],
+            'hari' => ['required', 'string', 'min:2', 'max:255', Rule::in(config('const.name_days'))],
+            'waktuMasuk' => ['required', 'min:2', 'max:255'],
+            'waktuKeluar' => ['required', 'string', 'min:2', 'max:255'],
+            'keterangan' => ['nullable', 'string'],
         ];
     }
 
-    public function save(){
+    public function save()
+    {
         $this->validate();
 
-        try{
+        try {
             DB::beginTransaction();
 
             ClassSchedule::create([
@@ -52,7 +54,7 @@ class Create extends Component
             ]);
 
             DB::commit();
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollBack();
 
             logger()->error(
@@ -77,26 +79,29 @@ class Create extends Component
             'detail' => "Berhasil menambahkan data pengguna.",
         ]);
 
-        return redirect()->route('master.class-schedule.index');
+        return redirect()->route('class-schedule.index');
     }
 
     #[Computed()]
-    public function teachers(){
-        return Teacher::all(['id','name','nip']);
+    public function teachers()
+    {
+        return Teacher::all(['id', 'name', 'nip']);
     }
 
     #[Computed()]
-    public function class_rooms(){
-        return ClassRoom::all(['id','name_class']);
+    public function class_rooms()
+    {
+        return ClassRoom::all(['id', 'name_class']);
     }
 
     #[Computed()]
-    public function subject_studies(){
-        return SubjectStudy::all(['id','name_subject']);
+    public function subject_studies()
+    {
+        return SubjectStudy::all(['id', 'name_subject']);
     }
 
     public function render()
     {
-        return view('livewire.master.class-schedule.create');
+        return view('livewire.class-schedule.create');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Master\Admin;
+namespace App\Livewire\Admin;
 
 use App\Exports\AdminExport;
 use App\Livewire\Traits\DataTable\WithBulkActions;
@@ -122,6 +122,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.master.admin.index');
+        return view('livewire.admin.index');
     }
 }
