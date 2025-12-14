@@ -15,24 +15,31 @@ class UserTableSeeder extends Seeder
     {
         $users = [
             [
-                'username'          => 'Bintang Admin',
-                'email'             => 'muhbintang650@gmail.com',
+                'username'          => 'Milda Admin',
+                'email'             => 'milda@gmail.com',
                 'email_verified_at' => now(),
-                'password'          => Hash::make('bintang123'),
-                'role'              => 'developer',
+                'password'          => Hash::make('milda123'),
+                'role'              => 'admin',
             ],
             [
-                'username'          => 'Fery Admin',
-                'email'             => 'feryfadulrahman@gmail.com',
+                'username'          => 'Rifat Admin',
+                'email'             => 'rifatsauqi@gmail.com',
                 'email_verified_at' => now(),
-                'password'          => Hash::make('fery123'),
-                'role'              => 'developer',
+                'password'          => Hash::make('rifat123'),
+                'role'              => 'admin',
             ],
             [
-                'username'          => 'Nurhaliza Admin',
-                'email'             => 'nurhalizaadmin@gmail.com',
+                'username'          => 'Nurfadilla Admin',
+                'email'             => 'nurfadilla@gmail.com',
                 'email_verified_at' => now(),
-                'password'          => Hash::make('nurhaliza123'),
+                'password'          => Hash::make('nurfadilla123'),
+                'role'              => 'admin',
+            ],
+            [
+                'username'          => 'Ulil Admin',
+                'email'             => 'ulil@gmail.com',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('ulil123'),
                 'role'              => 'admin',
             ],
         ];
