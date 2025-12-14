@@ -285,7 +285,7 @@ class Index extends Component
             'detail' => $message,
         ]);
 
-        return redirect()->route('master.subject-study.index');
+        return redirect()->route('subject-study.index');
     }
 
     #[Computed()]
@@ -312,6 +312,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.master.subject-study.index');
+        return view('livewire.subject-study.index');
     }
 }
