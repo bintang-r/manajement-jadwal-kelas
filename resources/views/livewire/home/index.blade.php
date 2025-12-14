@@ -8,15 +8,15 @@
     <x-alert />
 
     @if (in_array(auth()->user()->role, ['admin', 'developer']))
-        <livewire:home.admin-home />
+        {{-- <livewire:home.admin-home /> --}}
     @endif
 
     @if (auth()->user()->role == 'guru')
-        <livewire:home.teacher-home />
+        {{-- <livewire:home.teacher-home /> --}}
     @endif
 
     @if (auth()->user()->role == 'siswa')
-        <livewire:home.student-home />
+        {{-- <livewire:home.student-home /> --}}
     @endif
 
     <div class="card mt-4" wire:poll.30000ms>

@@ -23,7 +23,7 @@ class StudentTableSeeder extends Seeder
             [
                 'username'          => 'Milda Student',
                 'email'             => 'mildastudent@gmail.com',
-                'password'          => bcrypt('mildastudent123'),
+                'password'          => bcrypt('student123'),
                 'role'              => 'siswa',
 
                 'full_name'         => 'Nurhaliza Student',
